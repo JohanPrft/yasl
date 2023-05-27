@@ -1,0 +1,9 @@
+#! ./yasl_linux
+
+!!
+read
+@ (
+    eval
+    read
+)
+"^D\n" print
