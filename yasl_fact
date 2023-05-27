@@ -1,19 +1,39 @@
-#!./yasl_linux
+#! ./yasl_linux
 
-//patch : gerer les lettres
+{
+    ][          // unlist the string with the size
+    = 0 != ? (    // if size not 0
+        = 1 + !^    // duplicate size after each letter
+        # 2 - #!    // drop created list of letter
+    )
+} strlen        // must have the same stack in input and output
 
-2 != ? ("./yasl_fact <fact_num>\n" print 1 exit)	// if the result of the comparaison is true exit
-!           // drop argv0
-= 0 < ? ("<fact_num> must be positive\n" print 1 exit) // if true error
-= 20 > ? ("result overflow\n" print 1 exit) // if true error
-eval        // convert fact_num string to number
+// if argc != 2 -> ERR
+2 != ? ("./yasl_fact <fact_num>\n" print 1 exit)
 
-= 0 == ? ("1\n" print 0 exit)
+!   // drop argv0
 
-=:2 !//init the stack2 with the objective
-1:1 //init stack1 with the first nb of the factorial
-1   //init stack0 to be correct with the multiplication
+// if len argv1 > 2 -> ERR
+= strlen 2 > ? ("<fact_num> must be a positive integer\n" print 1 exit)
 
+// if first char is a letter -> ERR
+= 0 == ? (= "0" != ? ("<fact_num> must be a number\n" print 1 exit))    
+
+// if second char is a letter -> ERR
+= strlen 2 == ? (= ][ ! 2^ ! = 0 == ? (= "0" != ?("<fact_num> must be a number\n" print 1 exit)) ! )
+
+// if negative -> ERR
+= 0 < ? ("<fact_num> must be positive\n" print 1 exit)
+
+// if > 20 -> ERR
+= 20 > ? ("result overflow\n" print 1 exit)
+
+eval    // convert fact_num string to number
+= 0 == ? ("1\n" print 0 exit)   // if 0 -> print 1
+
+=:2 !   // init the stack2 with the objective
+1:1     // init stack1 with the first nb of the factorial
+1       // init stack0 to be correct with the multiplication
 
 {
     //if stack1 == stack2 print/exit
@@ -24,6 +44,5 @@ eval        // convert fact_num string to number
     1:= *   // multiply result with count
 
     facto
-}facto
-
+} facto
 facto
