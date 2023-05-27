@@ -1,0 +1,14 @@
+#!./yasl_linux
+
+2 <= ? ("yasl_repeat <start_num> <value1> [ <value2> [ ...]]\n" print 1 exit)	// if the result of the comparaison is true exit
+!   // drop argv0
+=   // dup start_num
+0 <= ? ("<start_num> must be strictly positive\n" print 1 exit) // if true error
+eval:1  // dup the int start_num in stack1
+
+# #(                // for each arg
+    1:= #(= print)  // print arg <start_num> times    
+    1:1 1:+:1       // increment <start_num>
+    "\n" print      // print newline between each arg
+    !               // drop arg to go to the next arg
+)

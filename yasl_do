@@ -1,0 +1,11 @@
+#!./yasl_linux
+
+! !         //drop argc bin
+
+eval:1      //eval and push in stack1
+=:2 !       //push in stack2
+eval:1      //eval and push in stack1
+2:=:1       //push the operator in stack1
+1:eval      //push the result on stack0
+print       //print result
+"\n" print

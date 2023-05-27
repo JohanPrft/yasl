@@ -1,0 +1,29 @@
+#!./yasl_linux
+
+//patch : gerer les lettres
+
+2 != ? ("./yasl_fact <fact_num>\n" print 1 exit)	// if the result of the comparaison is true exit
+!           // drop argv0
+= 0 < ? ("<fact_num> must be positive\n" print 1 exit) // if true error
+= 20 > ? ("result overflow\n" print 1 exit) // if true error
+eval        // convert fact_num string to number
+
+= 0 == ? ("1\n" print 0 exit)
+
+=:2 !//init the stack2 with the objective
+1:1 //init stack1 with the first nb of the factorial
+1   //init stack0 to be correct with the multiplication
+
+
+{
+    //if stack1 == stack2 print/exit
+    1:= 2:= == ? ("\n" + print 0 exit)
+
+    //calcul
+    1:1 1:+:1   // increment count
+    1:= *   // multiply result with count
+
+    facto
+}facto
+
+facto

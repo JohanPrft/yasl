@@ -1,0 +1,7 @@
+#!./yasl_linux
+
+1 ==			//push the result of the comparaison (consume 1 and argc)
+? exit			//if the result of the comparaison is true exit
+!				//drop argv0
+#				//count nb and push
+#("\n" + print)	// consume the nb and print_ln the stack
