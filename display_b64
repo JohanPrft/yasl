@@ -129,7 +129,7 @@ read
 +
 
 ][ 4 / = // drop size but needed for parsing
-"Image received, nb pixel : " print "\n" + print
+"Image received, nb pixels : " print "\n" + print
 sqrt =:8
 "Found square : " print "\n" + print
 #(
