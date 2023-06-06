@@ -1,8 +1,48 @@
 #!./yasl_linux
 
+{
+    "========= 0 ========\n" print
+    #
+    #(print "\n" print)
+    "====================\n" print
+    1 exit
+} print_stack_0
+{
+    "========= 1 ========\n" print
+    1:#
+    #(1:print "\n" print)
+    "====================\n" print
+    1 exit
+} print_stack_1
+{
+    "========= 2 ========\n" print
+    2:#
+    #(2:print "\n" print)
+    "====================\n" print
+    1 exit
+} print_stack_2
+{
+    "========= 9 ========\n" print
+    9:#
+    #(9:print "\n" print)
+    "====================\n" print
+    1 exit
+} print_stack_9
+
+{
+    =
+    ][ #(
+        = "0" - 9 > ? (0:2) : (
+	 "." == ? (0:2)
+      )
+    )
+    2:# %? #(2:!)
+} is_not_number
+
 2 <= ? ("yasl_repeat <start_num> <value1> [ <value2> [ ...]]\n" print 1 exit)	// if the result of the comparaison is true exit
 !   // drop argv0
 =   // dup start_num
+is_not_number ? ("<start_num> must be an integer\n" print 1 exit)
 0 <= ? ("<start_num> must be strictly positive\n" print 1 exit) // if true error
 eval:1  // dup the int start_num in stack1
 
